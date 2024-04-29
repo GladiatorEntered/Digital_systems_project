@@ -47,7 +47,7 @@ begin
     	VLD => DOUT_VLD
     );
 
-    buff: process(CLK, RST) is
+    din_buff: process(CLK, RST) is
     begin
 	    if RST = '1' then
 		    DIN_BUF <= "111";
