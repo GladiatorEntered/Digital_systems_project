@@ -82,7 +82,7 @@ begin
 		    shift_register <= "00000000";
 		    --DOUT_BUF <= "00000000";
 	    elsif CLK'event and CLK = '1'then
-		    if midbit'event and midbit = '1' then
+		    if midbit = '1' then
 	            	shift_register(7) <= DIN_BUF(2);
 	    	    	for index in 1 to 7 loop
 		            shift_register(index-1) <= shift_register(index);
