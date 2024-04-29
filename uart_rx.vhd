@@ -76,16 +76,18 @@ begin
 	    end if;
     end process;
 
-    nbit_shr: process(midbit, RST) is
+    nbit_shr: process(CLK, RST) is
     begin
 	    if RST = '1' then
 		    shift_register <= "00000000";
 		    --DOUT_BUF <= "00000000";
-	    elsif midbit'event and midbit = '1' then
-	            shift_register(7) <= DIN_BUF(2);
-	    	    for index in 1 to 7 loop
+	    elsif CLK'event and CLK = '1'then
+		    if midbit'event and midbit = '1' then
+	            	shift_register(7) <= DIN_BUF(2);
+	    	    	for index in 1 to 7 loop
 		            shift_register(index-1) <= shift_register(index);
-	    	    end loop;
+	    	    	end loop;
+		    end if;
 		    --DOUT_BUF <= shift_register;
 	    end if;
     end process;
@@ -110,7 +112,7 @@ begin
 	    end if;
     end process;
 
-    dout_reg: process(CLK, cmp_midbits, RST) is
+    dout_reg: process(CLK, RST) is
     begin
 	    if RST = '1' then
 		    DOUT <= "00000000";
